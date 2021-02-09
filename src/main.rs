@@ -1,7 +1,7 @@
-use ba_gacha::banner::BannerBuilder;
-use ba_gacha::gacha::{GachaBuilder, Recruitment};
-use ba_gacha::i18n::Language;
-use ba_gacha::student::Student;
+use bluearch_recruitment::banner::BannerBuilder;
+use bluearch_recruitment::gacha::{GachaBuilder, Recruitment};
+use bluearch_recruitment::i18n::Language;
+use bluearch_recruitment::student::Student;
 use std::{fs::File, io::Read};
 
 fn main() {

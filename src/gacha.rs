@@ -67,7 +67,7 @@ impl GachaBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use ba_gacha::gacha::GachaBuilder;
+    /// # use bluearch_recruitment::gacha::GachaBuilder;
     /// let gacha_builder: GachaBuilder = GachaBuilder::new(79.0, 18.5, 2.5)
     ///     .with_pool(Vec::new());
     /// ```
@@ -91,8 +91,8 @@ impl GachaBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use ba_gacha::gacha::{GachaBuilder, Rarity};
-    /// # use ba_gacha::student::Student;
+    /// # use bluearch_recruitment::gacha::{GachaBuilder, Rarity};
+    /// # use bluearch_recruitment::student::Student;
     ///
     /// let aru = Student::new("アル", Rarity::Three);
     /// let hina = Student::new("ヒナ", Rarity::Three);
@@ -113,13 +113,15 @@ impl GachaBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use ba_gacha::gacha::{GachaBuilder, Rarity};
-    /// # use ba_gacha::student::Student;
+    /// # use bluearch_recruitment::gacha::{GachaBuilder, Rarity};
+    /// # use bluearch_recruitment::student::Student;
     /// let aru = Student::new("アル", Rarity::Three);
     /// let hina = Student::new("ヒナ", Rarity::Three);
+    /// let rate_up = vec![aru, hina.clone()];
+    /// let priority = vec![hina];
     /// let gacha_builder = GachaBuilder::new(79.0, 18.5, 2.5)
-    ///     .with_pool(vec![aru, hina.clone()])
-    ///     .with_priority(vec![hina], 3.5);
+    ///     .with_pool(rate_up)
+    ///     .with_priority(&priority, 3.5);
     /// ```
     pub fn with_priority(self, students: &[Student], total_rate: f32) -> Self {
         Self {
@@ -135,8 +137,8 @@ impl GachaBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use ba_gacha::gacha::{GachaBuilder, Gacha, Rarity};
-    /// # use ba_gacha::student::Student;
+    /// # use bluearch_recruitment::gacha::{GachaBuilder, Gacha, Rarity};
+    /// # use bluearch_recruitment::student::Student;
     /// let aru = Student::new("アル", Rarity::Three);
     /// let hina = Student::new("ヒナ", Rarity::Three);
     /// let gacha = GachaBuilder::default()
@@ -171,7 +173,7 @@ impl Gacha {
     ///
     /// # Examples
     /// ```
-    /// # use ba_gacha::gacha::{GachaBuilder, Rarity};
+    /// # use bluearch_recruitment::gacha::{GachaBuilder, Rarity};
     /// let gacha = GachaBuilder::new(79.0, 18.5, 2.5)
     ///     .with_pool(Vec::new())
     ///     .finish()

@@ -25,8 +25,8 @@ impl Student {
     ///
     /// # Examples
     /// ```
-    /// # use ba_gacha::gacha::Rarity;
-    /// # use ba_gacha::student::Student;
+    /// # use bluearch_recruitment::gacha::Rarity;
+    /// # use bluearch_recruitment::student::Student;
     ///
     /// let mutsuki = Student::new("ムツキ", Rarity::Two);
     /// ```
@@ -45,9 +45,9 @@ impl Student {
     ///
     /// # Examples
     /// ```
-    /// # use ba_gacha::gacha::Rarity;
-    /// # use ba_gacha::student::Student;
-    /// # use ba_gacha::i18n::Language;
+    /// # use bluearch_recruitment::gacha::Rarity;
+    /// # use bluearch_recruitment::student::Student;
+    /// # use bluearch_recruitment::i18n::Language;
     ///
     /// let mut mutsuki = Student::new("ムツキ", Rarity::Two);
     /// mutsuki.add_translation(Language::English, "Mutsuki");
