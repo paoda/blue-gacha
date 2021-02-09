@@ -1,0 +1,407 @@
+[
+    {
+        "name": {
+            "translations": {
+                "jpn": "ヒナ",
+                "eng": "Hina"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "イオリ",
+                "eng": "Iori"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "ハルナ",
+                "eng": "Haruna"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "イズミ",
+                "eng": "Izumi"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Aru",
+                "jpn": "アル"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "スミレ",
+                "eng": "Sumire"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "エイミ",
+                "eng": "Iemi"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Karin",
+                "jpn": "カリン"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "ネル",
+                "eng": "Neru"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Maki",
+                "jpn": "マキ"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Hibiki",
+                "jpn": "ヒビキ"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Saya",
+                "jpn": "サヤ"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Shun",
+                "jpn": "シュン"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Shiroko",
+                "jpn": "シロコ"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Hoshino",
+                "jpn": "ホシノ"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "ヒフミ",
+                "eng": "Hifumi"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Tsurugi",
+                "jpn": "ツルギ"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "アカリ",
+                "eng": "Akari"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "ジュンコ",
+                "eng": "Junko"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "ムツキ",
+                "eng": "Mutsuki"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Kayoko",
+                "jpn": "カヨコ"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "フウカ",
+                "eng": "Fuuka"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "ユウカ",
+                "eng": "Yuuka"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Akane",
+                "jpn": "アカネ"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "ハル",
+                "eng": "Haru"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Utaha",
+                "jpn": "ウタハ"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "チセ",
+                "eng": "Chise"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Tsubaki",
+                "jpn": "ツバキ"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "セリカ",
+                "eng": "Serika"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "アヤネ",
+                "eng": "Ayane"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Hasumi",
+                "jpn": "ハスミ"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Hanae",
+                "jpn": "ハナエ"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Airi",
+                "jpn": "アイリ"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "ノゾミ",
+                "eng": "Nozomi"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Chinatsu",
+                "jpn": "チナツ"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Haruka",
+                "jpn": "ハルカ"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "ジュリ",
+                "eng": "Juri"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "コタマ",
+                "eng": "Kotama"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "アスナ",
+                "eng": "Asuna"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "コトリ",
+                "eng": "Kotori"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "フィーナ",
+                "eng": "Pina"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "jpn": "スズミ",
+                "eng": "Suzumi"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Shimiko",
+                "jpn": "シミコ"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Serina",
+                "jpn": "セリナ"
+            }
+        },
+        "rarity": 1
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Yoshimi",
+                "jpn": "ヨシミ"
+            }
+        },
+        "rarity": 1
+    }
+]

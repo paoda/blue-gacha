@@ -43,6 +43,7 @@ pub trait Recruitment {
 pub struct GachaBuilder {
     rates: Option<(usize, usize, usize)>,
     pool: Option<Vec<Student>>,
+    priority: Option<(Vec<Student>, usize)>,
 }
 
 impl Default for GachaBuilder {
@@ -50,6 +51,7 @@ impl Default for GachaBuilder {
         Self {
             rates: Some((790, 185, 25)),
             pool: Default::default(),
+            priority: Default::default(),
         }
     }
 }
@@ -78,7 +80,7 @@ impl GachaBuilder {
 
         Self {
             rates: Some((one, two, three)),
-            pool: Default::default(),
+            ..Default::default()
         }
     }
 
@@ -103,6 +105,29 @@ impl GachaBuilder {
         }
     }
 
+    /// Attaches a pool of Students who have increased rates
+    ///
+    /// # Arugments
+    /// * `students` - A Vector of Students who have increased rates
+    /// * `rate` - The rate of the students in the previous argument
+    ///
+    /// # Examples
+    /// ```
+    /// # use ba_gacha::gacha::{GachaBuilder, Rarity};
+    /// # use ba_gacha::student::Student;
+    /// let aru = Student::new("アル", Rarity::Three);
+    /// let hina = Student::new("ヒナ", Rarity::Three);
+    /// let gacha_builder = GachaBuilder::new(79.0, 18.5, 2.5)
+    ///     .with_pool(vec![aru, hina.clone()])
+    ///     .with_priority(vec![hina], 3.5);
+    /// ```
+    pub fn with_priority(self, students: &[Student], total_rate: f32) -> Self {
+        Self {
+            priority: Some((students.to_vec(), (total_rate * 10.0) as usize)),
+            ..self
+        }
+    }
+
     /// Consumes a GachaBuilder and retuns a Gacha Struct.
     ///
     /// Will return `None` if the `rates` or `pool` property of
@@ -122,6 +147,7 @@ impl GachaBuilder {
         Some(Gacha {
             rates: self.rates?,
             pool: self.pool?,
+            priority: self.priority,
         })
     }
 }
@@ -130,8 +156,10 @@ impl GachaBuilder {
 /// to randomly select a Student from the gacha pool
 #[derive(Debug, Default, Clone)]
 pub struct Gacha {
-    pub rates: (usize, usize, usize), // One Star, Two Star, Three Star
+    /// (1★, 2★, 3★)
+    pub rates: (usize, usize, usize),
     pub pool: Vec<Student>,
+    pub priority: Option<(Vec<Student>, usize)>,
 }
 
 impl Gacha {

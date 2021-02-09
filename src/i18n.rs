@@ -7,6 +7,24 @@ pub struct I18nString {
     translations: HashMap<Language, String>,
 }
 
+impl PartialEq for I18nString {
+    fn eq(&self, other: &Self) -> bool {
+        self.get(Language::Japanese).unwrap() == other.get(Language::Japanese).unwrap()
+    }
+}
+
+impl PartialEq<String> for I18nString {
+    fn eq(&self, other: &String) -> bool {
+        self.get(Language::Japanese).unwrap() == *other
+    }
+}
+
+impl PartialEq<&str> for I18nString {
+    fn eq(&self, other: &&str) -> bool {
+        self.get(Language::Japanese).unwrap() == *other
+    }
+}
+
 impl std::fmt::Display for I18nString {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(self.translations.get(&Language::Japanese).unwrap().as_str())

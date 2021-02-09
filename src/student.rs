@@ -1,6 +1,5 @@
 use crate::gacha::Rarity;
-use crate::i18n::I18nString;
-use crate::i18n::Language;
+use crate::i18n::{I18nString, Language};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -19,16 +18,16 @@ impl std::fmt::Display for Student {
 
 impl Student {
     /// Creates a new Instance of a Student
-    /// 
+    ///
     /// # Arguments
     /// * `jpn_name` - The name of the Student from the Japanese Version of Blue Archive
     /// * `rarity` - The Rarity of the Student
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use ba_gacha::gacha::Rarity;
     /// # use ba_gacha::student::Student;
-    /// 
+    ///
     /// let mutsuki = Student::new("ムツキ", Rarity::Two);
     /// ```
     pub fn new(jpn_name: &str, rarity: Rarity) -> Self {
@@ -39,17 +38,17 @@ impl Student {
     }
 
     /// Adds a new Translation to the internal [`I18nString`].
-    /// 
+    ///
     /// # Arguments
     /// * `language` - The Language of the translation to be added
     /// * `name` - The Translated name, in the language of the previous argument.
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use ba_gacha::gacha::Rarity;
     /// # use ba_gacha::student::Student;
     /// # use ba_gacha::i18n::Language;
-    /// 
+    ///
     /// let mut mutsuki = Student::new("ムツキ", Rarity::Two);
     /// mutsuki.add_translation(Language::English, "Mutsuki");
     /// ```
