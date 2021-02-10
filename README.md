@@ -15,7 +15,7 @@ file.read_to_string(&mut json).unwrap();
 let students: Vec<Student> = serde_json::from_str(&json).unwrap();
 ```
 
-This Repo contains `students.json` which is an Array where each object within the arry contains a Student's Japanese name, English TL name and rarity.
+This Repo contains `students.json` (in the examples directory) which is an Array where each object within the array contains a Student's Japanese name, English TL name and rarity.
 
 ```rust
 let banner_students: Vec<Student> = students
@@ -46,7 +46,7 @@ This example creates the ピックアップ募集 Banner which ran from 2021-02-
 
 After this, we want to determine which units are on rate-up if there are any. In this example, ホシノ and シロコ have increased pull rates. 
 
-The Rest of the code consists of instantiating the Gacha and Banner Structs using their respective Builders. 
+The Rest of the code consists of instantiating the Gacha and Banner structs using their respective Builders. 
 
 After this: 
 
@@ -55,4 +55,4 @@ let student: Student = pickup_banner.roll();
 // or 
 let students: [Student; 10] = pickup_banner.roll10();
 ```
-can be called (when the `Recruitment` trait is in scope) to allow for acurate simulation of Blue Archive's Gacha.
+can be called (when the `Recruitment` trait is in scope) to allow for accurate simulation of Blue Archive's Gacha.

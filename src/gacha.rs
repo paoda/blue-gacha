@@ -107,7 +107,7 @@ impl GachaBuilder {
 
     /// Attaches a pool of Students who have increased rates
     ///
-    /// # Arugments
+    /// # Arguments
     /// * `students` - A Vector of Students who have increased rates
     /// * `rate` - The rate of the students in the previous argument
     ///
@@ -130,7 +130,7 @@ impl GachaBuilder {
         }
     }
 
-    /// Consumes a GachaBuilder and retuns a Gacha Struct.
+    /// Consumes a GachaBuilder and returns a Gacha Struct.
     ///
     /// Will return `None` if the `rates` or `pool` property of
     /// GachaBuilder have not been set.
