@@ -1,5 +1,6 @@
 use crate::student::Student;
 use serde_repr::{Deserialize_repr, Serialize_repr};
+use std::cmp::Ordering;
 #[derive(Debug, Clone, Copy, Serialize_repr, Deserialize_repr, PartialEq, Eq)]
 #[repr(u8)]
 /// The Available Rarities in Blue Archive's Gacha System
@@ -22,6 +23,28 @@ impl std::fmt::Display for Rarity {
 impl Default for Rarity {
     fn default() -> Self {
         Self::One
+    }
+}
+
+impl PartialOrd for Rarity {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(match (*self, other) {
+            (Rarity::One, Rarity::One) => Ordering::Equal,
+            (Rarity::One, Rarity::Two) => Ordering::Less,
+            (Rarity::One, Rarity::Three) => Ordering::Less,
+            (Rarity::Two, Rarity::One) => Ordering::Greater,
+            (Rarity::Two, Rarity::Two) => Ordering::Equal,
+            (Rarity::Two, Rarity::Three) => Ordering::Less,
+            (Rarity::Three, Rarity::One) => Ordering::Greater,
+            (Rarity::Three, Rarity::Two) => Ordering::Greater,
+            (Rarity::Three, Rarity::Three) => Ordering::Equal,
+        })
+    }
+}
+
+impl Ord for Rarity {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.partial_cmp(other).unwrap()
     }
 }
 
