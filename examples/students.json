@@ -155,6 +155,24 @@
     {
         "name": {
             "translations": {
+                "eng": "Mashiro",
+                "jpn": "マシロ"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Izuna",
+                "jpn": "イズナ"
+            }
+        },
+        "rarity": 3
+    },
+    {
+        "name": {
+            "translations": {
                 "jpn": "アカリ",
                 "eng": "Akari"
             }
@@ -292,6 +310,15 @@
             "translations": {
                 "eng": "Airi",
                 "jpn": "アイリ"
+            }
+        },
+        "rarity": 2
+    },
+    {
+        "name": {
+            "translations": {
+                "eng": "Shizuko",
+                "jpn": "シズコ"
             }
         },
         "rarity": 2
