@@ -55,4 +55,32 @@ impl Student {
     pub fn add_translation(&mut self, language: Language, name: &str) {
         self.name.update(language, name);
     }
+
+    pub fn into_priority_student(self, rate: f32) -> PriorityStudent {
+        PriorityStudent {
+            inner: self,
+            rate: (rate * 10.0) as usize,
+        }
+    }
+}
+
+/// A Priority Student is a student who has a pull-rate that is unique from
+/// the rest of the rest of their peers in their star rating
+#[derive(Debug, Clone)]
+pub struct PriorityStudent {
+    inner: Student,
+    pub rate: usize,
+}
+
+impl PriorityStudent {
+    pub fn new(student: Student, rate: f32) -> Self {
+        Self {
+            inner: student,
+            rate: (rate * 10.0) as usize,
+        }
+    }
+
+    pub fn student(&self) -> &Student {
+        &self.inner
+    }
 }

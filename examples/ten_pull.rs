@@ -4,34 +4,47 @@ use bluearch_recruitment::i18n::Language;
 use bluearch_recruitment::student::Student;
 use std::{fs::File, io::Read};
 
+const THREE_STAR_RATE: f32 = 2.5;
+const TWO_STAR_RATE: f32 = 18.5;
+const ONE_STAR_RATE: f32 = 79.0;
+
+const KARIN_RATE: f32 = 0.7;
+const MUTSUKI_RATE: f32 = 0.3;
+
 fn main() {
-    let mut file = File::open("./examples/students.json").unwrap();
-    let mut json = String::new();
-    file.read_to_string(&mut json).unwrap();
+    // The Banner we're rolling from is a hypothetical banner which includes every unit in the game
+    // (e.g. including Nozomi)
+    //
+    // Karin (3*) and Mutsuki (2*) will have increased rates because I like them the most.
+    // Karin will have a pull-rate of 0.7%, and Mutsuki will have a pull-rate of 3.0%
 
-    let students: Vec<Student> = serde_json::from_str(&json).unwrap();
+    let mut students_str = String::new();
+    let mut students = File::open("./examples/students.json").unwrap();
+    students.read_to_string(&mut students_str).unwrap();
 
-    // This particular banner consists of everyone BUT Nozomi.
-    let banner_students: Vec<Student> = students
-        .iter()
-        .filter(|student| student.name != "ノゾミ")
-        .map(|student| student.clone())
-        .collect();
+    let students: Vec<Student> = serde_json::from_str(&students_str).unwrap();
 
-    // Both Hoshino and Shiroko have an increased chance of being pulled.
-    let hoshino = find_student(&students, "ホシノ").unwrap();
-    let shiroko = find_student(&students, "シロコ").unwrap();
-    let rate_up_students = vec![shiroko, hoshino];
+    let karin = find_student(&students, "カリン")
+        .expect("カリン is not present in ./examples/students.json")
+        .into_priority_student(KARIN_RATE);
 
-    let gacha = GachaBuilder::new(79.0, 18.5, 2.5)
-        .with_pool(banner_students)
-        .with_priority(&rate_up_students, 0.7)
+    let mutsuki = find_student(&students, "ムツキ")
+        .expect("ムツキ is not present in ./examples/students.json")
+        .into_priority_student(MUTSUKI_RATE);
+
+    let sparkable = vec![karin.student().clone()];
+    let priority = vec![karin, mutsuki];
+
+    let gacha = GachaBuilder::new(ONE_STAR_RATE, TWO_STAR_RATE, THREE_STAR_RATE)
+        .with_pool(students)
+        .with_priority(&priority)
         .finish()
         .unwrap();
 
-    let banner = BannerBuilder::new("ピックアップ募集")
-        .with_name_translation(Language::English, "Rate-Up Registration")
-        .with_sparkable_students(&rate_up_students)
+    // I'm some N5 loser don't judge too hard pls...
+    let banner = BannerBuilder::new("不運ですね。")
+        .with_name_translation(Language::English, "Unlucky, right?")
+        .with_sparkable_students(&sparkable)
         .with_gacha(&gacha)
         .finish()
         .unwrap();

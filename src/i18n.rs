@@ -60,9 +60,7 @@ impl I18nString {
     ///
     /// Will return None if there is no translation for the given language
     pub fn get(&self, language: Language) -> Option<String> {
-        self.translations
-            .get(&language)
-            .map(|message| message.clone())
+        self.translations.get(&language).cloned()
     }
 }
 

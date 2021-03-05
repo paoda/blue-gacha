@@ -1,6 +1,6 @@
 use crate::gacha::{Gacha, Rarity, Recruitment};
 use crate::i18n::{I18nString, Language};
-use crate::student::Student;
+use crate::student::{PriorityStudent, Student};
 use rand::distributions::{Distribution, WeightedIndex};
 use rand::Rng;
 use std::convert::{TryFrom, TryInto};
@@ -101,15 +101,15 @@ impl BannerBuilder {
     }
 }
 
-#[derive(Debug, Clone, Copy)]
-enum StudentType {
-    One = 1,  // One Star
-    Two,      // Two Stars
-    Three,    // Three Stars
-    Priority, // Rate-up Student (Presumably 3*)
+#[derive(Debug, Clone)]
+enum StudentType<'a> {
+    One,   // One Star
+    Two,   // Two Stars
+    Three, // Three Stars
+    Priority(&'a PriorityStudent),
 }
 
-impl From<Rarity> for StudentType {
+impl<'a> From<Rarity> for StudentType<'a> {
     fn from(rarity: Rarity) -> Self {
         match rarity {
             Rarity::One => Self::One,
@@ -119,15 +119,23 @@ impl From<Rarity> for StudentType {
     }
 }
 
-impl TryFrom<StudentType> for Rarity {
+impl<'a> TryFrom<StudentType<'a>> for Rarity {
     type Error = &'static str;
 
     fn try_from(value: StudentType) -> Result<Self, Self::Error> {
+        Rarity::try_from(&value)
+    }
+}
+
+impl<'a> TryFrom<&StudentType<'a>> for Rarity {
+    type Error = &'static str;
+
+    fn try_from(value: &StudentType<'a>) -> Result<Self, Self::Error> {
         Ok(match value {
             StudentType::One => Self::One,
             StudentType::Two => Self::Two,
             StudentType::Three => Self::Three,
-            StudentType::Priority => return Err("Can not convert from Priority to Rarity"),
+            StudentType::Priority(_) => return Err("Can not convert from Priority to Rarity"),
         })
     }
 }
@@ -141,39 +149,59 @@ pub struct Banner {
 impl Banner {
     fn get_random_student(&self) -> Student {
         let mut rng = rand::thread_rng();
-        let priority_rate = self.gacha.priority.as_ref().map_or(0, |tuple| tuple.1);
-        let three_star_rate = self.gacha.get_rate(Rarity::Three) - priority_rate;
 
-        let items: [(StudentType, usize); 4] = [
-            (StudentType::One, self.gacha.get_rate(Rarity::One)),
-            (StudentType::Two, self.gacha.get_rate(Rarity::Two)),
-            (StudentType::Three, three_star_rate),
-            (StudentType::Priority, priority_rate),
-        ];
+        let empty_vec = Vec::new();
+        let priority_students = self.gacha.priority.as_ref().unwrap_or(&empty_vec);
+        let mut rates = (
+            self.gacha.get_rate(Rarity::One),
+            self.gacha.get_rate(Rarity::Two),
+            self.gacha.get_rate(Rarity::Three),
+        );
+
+        for priority_student in priority_students {
+            match priority_student.student().rarity {
+                Rarity::One => rates.0 -= priority_student.rate,
+                Rarity::Two => rates.1 -= priority_student.rate,
+                Rarity::Three => rates.2 -= priority_student.rate,
+            };
+        }
+
+        let mut items: Vec<(StudentType, usize)> = Vec::with_capacity(3 + priority_students.len());
+        items.push((StudentType::One, rates.0));
+        items.push((StudentType::Two, rates.1));
+        items.push((StudentType::Three, rates.2));
+
+        items.extend(
+            priority_students
+                .iter()
+                .map(|student| (StudentType::Priority(student), student.rate)),
+        );
 
         let dist = WeightedIndex::new(items.iter().map(|item| item.1)).unwrap();
-        let students = &self.gacha.pool;
+        let student_pool = &self.gacha.pool;
 
-        match items[dist.sample(&mut rng)] {
-            (StudentType::Priority, _) => {
-                let priority_students = &self.gacha.priority.as_ref().unwrap().0;
-
-                let index: usize = rng.gen_range(0..priority_students.len());
-                priority_students[index].clone()
-            }
-            (rarity, _) => {
-                let students: Vec<&Student> = students
+        match &items[dist.sample(&mut rng)] {
+            (StudentType::Priority(priority_student), _) => priority_student.student().clone(),
+            (student_type, _) => {
+                let students: Vec<&Student> = student_pool
                     .iter()
-                    .filter(|student| student.rarity == rarity.try_into().unwrap())
+                    .filter(|student| student.rarity == student_type.try_into().unwrap())
+                    .filter(|student| {
+                        // Remove any Rate-Up Units
+                        // TODO: Determine whether this is the right way of implementing priority gacha
+                        !priority_students
+                            .iter()
+                            .any(|priority_student| student.name == priority_student.student().name)
+                    })
                     .collect();
-
-                let index: usize = rng.gen_range(0..students.len());
+                let index = rng.gen_range(0..students.len());
                 students[index].clone()
             }
         }
     }
 
     fn get_random_student_of_rarity(&self, rarity: Rarity) -> Student {
+        // NOTE: This does not actually follow the rules of any given banner. Only get_random_student() does.
         let students = &self.gacha.pool;
         let two_star_students: Vec<&Student> = students
             .iter()
@@ -200,10 +228,8 @@ impl Recruitment for Banner {
 
         let two_star_present = students.iter().any(|student| student.rarity == Rarity::Two);
 
-        if !two_star_present {
-            if students[students.len() - 1].rarity != Rarity::Three {
-                students[students.len() - 1] = self.get_random_student_of_rarity(Rarity::Two);
-            }
+        if !two_star_present && students[students.len() - 1].rarity != Rarity::Three {
+            students[students.len() - 1] = self.get_random_student_of_rarity(Rarity::Two);
         }
 
         students

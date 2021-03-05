@@ -1,4 +1,4 @@
-use crate::student::Student;
+use crate::student::{PriorityStudent, Student};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 use std::cmp::Ordering;
 #[derive(Debug, Clone, Copy, Serialize_repr, Deserialize_repr, PartialEq, Eq)]
@@ -66,7 +66,7 @@ pub trait Recruitment {
 pub struct GachaBuilder {
     rates: Option<(usize, usize, usize)>,
     pool: Option<Vec<Student>>,
-    priority: Option<(Vec<Student>, usize)>,
+    priority: Option<Vec<PriorityStudent>>,
 }
 
 impl Default for GachaBuilder {
@@ -137,18 +137,18 @@ impl GachaBuilder {
     /// # Examples
     /// ```
     /// # use bluearch_recruitment::gacha::{GachaBuilder, Rarity};
-    /// # use bluearch_recruitment::student::Student;
-    /// let aru = Student::new("アル", Rarity::Three);
-    /// let hina = Student::new("ヒナ", Rarity::Three);
-    /// let rate_up = vec![aru, hina.clone()];
-    /// let priority = vec![hina];
+    /// # use bluearch_recruitment::student::{Student, PriorityStudent};
+    /// let aru = Student::new("アル", Rarity::Three).into_priority_student(3.5 / 2.0);
+    /// let hina = Student::new("ヒナ", Rarity::Three).into_priority_student(3.5 / 2.0);
+    /// let pool = vec![aru.student().clone(), hina.student().clone()];
+    /// let priority = vec![aru, hina];
     /// let gacha_builder = GachaBuilder::new(79.0, 18.5, 2.5)
-    ///     .with_pool(rate_up)
-    ///     .with_priority(&priority, 3.5);
+    ///     .with_pool(pool)
+    ///     .with_priority(&priority);
     /// ```
-    pub fn with_priority(self, students: &[Student], total_rate: f32) -> Self {
+    pub fn with_priority(self, students: &[PriorityStudent]) -> Self {
         Self {
-            priority: Some((students.to_vec(), (total_rate * 10.0) as usize)),
+            priority: Some(students.to_vec()),
             ..self
         }
     }
@@ -184,7 +184,7 @@ pub struct Gacha {
     /// (1★, 2★, 3★)
     pub rates: (usize, usize, usize),
     pub pool: Vec<Student>,
-    pub priority: Option<(Vec<Student>, usize)>,
+    pub priority: Option<Vec<PriorityStudent>>,
 }
 
 impl Gacha {
