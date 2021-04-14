@@ -90,7 +90,7 @@ impl GachaBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use bluearch_recruitment::gacha::GachaBuilder;
+    /// # use blue_gacha::gacha::GachaBuilder;
     /// let gacha_builder: GachaBuilder = GachaBuilder::new(79.0, 18.5, 2.5)
     ///     .with_pool(Vec::new());
     /// ```
@@ -114,8 +114,8 @@ impl GachaBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use bluearch_recruitment::gacha::{GachaBuilder, Rarity};
-    /// # use bluearch_recruitment::student::Student;
+    /// # use blue_gacha::gacha::{GachaBuilder, Rarity};
+    /// # use blue_gacha::student::Student;
     ///
     /// let aru = Student::new("アル", Rarity::Three);
     /// let hina = Student::new("ヒナ", Rarity::Three);
@@ -136,8 +136,8 @@ impl GachaBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use bluearch_recruitment::gacha::{GachaBuilder, Rarity};
-    /// # use bluearch_recruitment::student::{Student, PriorityStudent};
+    /// # use blue_gacha::gacha::{GachaBuilder, Rarity};
+    /// # use blue_gacha::student::{Student, PriorityStudent};
     /// let aru = Student::new("アル", Rarity::Three).into_priority_student(3.5 / 2.0);
     /// let hina = Student::new("ヒナ", Rarity::Three).into_priority_student(3.5 / 2.0);
     /// let pool = vec![aru.student().clone(), hina.student().clone()];
@@ -160,8 +160,8 @@ impl GachaBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use bluearch_recruitment::gacha::{GachaBuilder, Gacha, Rarity};
-    /// # use bluearch_recruitment::student::Student;
+    /// # use blue_gacha::gacha::{GachaBuilder, Gacha, Rarity};
+    /// # use blue_gacha::student::Student;
     /// let aru = Student::new("アル", Rarity::Three);
     /// let hina = Student::new("ヒナ", Rarity::Three);
     /// let gacha = GachaBuilder::default()
@@ -196,7 +196,7 @@ impl Gacha {
     ///
     /// # Examples
     /// ```
-    /// # use bluearch_recruitment::gacha::{GachaBuilder, Rarity};
+    /// # use blue_gacha::gacha::{GachaBuilder, Rarity};
     /// let gacha = GachaBuilder::new(79.0, 18.5, 2.5)
     ///     .with_pool(Vec::new())
     ///     .finish()

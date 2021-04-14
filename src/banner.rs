@@ -21,7 +21,7 @@ impl BannerBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use bluearch_recruitment::banner::BannerBuilder;
+    /// # use blue_gacha::banner::BannerBuilder;
     /// let banner_builder = BannerBuilder::new("ピックアップ募集");
     /// ```
     pub fn new(jpn_name: &str) -> Self {
@@ -39,8 +39,8 @@ impl BannerBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use bluearch_recruitment::banner::BannerBuilder;
-    /// # use bluearch_recruitment::i18n::Language;
+    /// # use blue_gacha::banner::BannerBuilder;
+    /// # use blue_gacha::i18n::Language;
     /// let banner_builder = BannerBuilder::new("ピックアップ募集")
     ///     .with_name_translation(Language::English, "Focus Recruitment");
     /// ```
@@ -56,8 +56,8 @@ impl BannerBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use bluearch_recruitment::gacha::GachaBuilder;
-    /// # use bluearch_recruitment::banner::BannerBuilder;
+    /// # use blue_gacha::gacha::GachaBuilder;
+    /// # use blue_gacha::banner::BannerBuilder;
     /// let gacha = GachaBuilder::default()
     ///     .with_pool(Vec::new())
     ///     .finish().unwrap();
@@ -79,8 +79,8 @@ impl BannerBuilder {
     ///
     /// # Examples
     /// ```
-    /// # use bluearch_recruitment::student::Student;
-    /// # use bluearch_recruitment::banner::BannerBuilder;
+    /// # use blue_gacha::student::Student;
+    /// # use blue_gacha::banner::BannerBuilder;
     /// let students = Vec::new();
     /// let banner_builder = BannerBuilder::new("ピックアップ募集")
     ///     .with_sparkable_students(&students);

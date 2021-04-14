@@ -1,7 +1,7 @@
-use bluearch_recruitment::banner::BannerBuilder;
-use bluearch_recruitment::gacha::{GachaBuilder, Recruitment};
-use bluearch_recruitment::i18n::Language;
-use bluearch_recruitment::student::Student;
+use blue_gacha::banner::BannerBuilder;
+use blue_gacha::gacha::{GachaBuilder, Recruitment};
+use blue_gacha::i18n::Language;
+use blue_gacha::student::Student;
 use std::{fs::File, io::Read};
 
 const THREE_STAR_RATE: f32 = 2.5;
