@@ -65,9 +65,9 @@ impl BannerBuilder {
     /// let banner_builder = BannerBuilder::new("ピックアップ募集")
     ///     .with_gacha(&gacha);
     /// ```
-    pub fn with_gacha(self, gacha: &Gacha) -> Self {
+    pub fn with_gacha(self, gacha: Gacha) -> Self {
         Self {
-            gacha: Some(gacha.to_owned()),
+            gacha: Some(gacha),
             ..self
         }
     }
@@ -85,7 +85,7 @@ impl BannerBuilder {
     /// let banner_builder = BannerBuilder::new("ピックアップ募集")
     ///     .with_sparkable_students(&students);
     /// ```
-    pub fn with_sparkable_students(self, students: &[Student]) -> Self {
+    pub fn with_sparkable_students(self, students: Vec<Student>) -> Self {
         Self {
             sparkable: Some(students.to_vec()),
             ..self

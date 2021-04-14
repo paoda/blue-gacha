@@ -1,6 +1,11 @@
 use crate::student::{PriorityStudent, Student};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 use std::cmp::Ordering;
+
+const THREE_STAR_RATE: usize = 25;
+const TWO_STAR_RATE: usize = 185;
+const ONE_STAR_RATE: usize = 790;
+
 #[derive(Debug, Clone, Copy, Serialize_repr, Deserialize_repr, PartialEq, Eq)]
 #[repr(u8)]
 /// The Available Rarities in Blue Archive's Gacha System
@@ -72,7 +77,7 @@ pub struct GachaBuilder {
 impl Default for GachaBuilder {
     fn default() -> Self {
         Self {
-            rates: Some((790, 185, 25)),
+            rates: Some((ONE_STAR_RATE, TWO_STAR_RATE, THREE_STAR_RATE)),
             pool: Default::default(),
             priority: Default::default(),
         }
@@ -146,9 +151,9 @@ impl GachaBuilder {
     ///     .with_pool(pool)
     ///     .with_priority(&priority);
     /// ```
-    pub fn with_priority(self, students: &[PriorityStudent]) -> Self {
+    pub fn with_priority(self, students: Vec<PriorityStudent>) -> Self {
         Self {
-            priority: Some(students.to_vec()),
+            priority: Some(students),
             ..self
         }
     }

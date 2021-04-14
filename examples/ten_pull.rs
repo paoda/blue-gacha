@@ -37,15 +37,15 @@ fn main() {
 
     let gacha = GachaBuilder::new(ONE_STAR_RATE, TWO_STAR_RATE, THREE_STAR_RATE)
         .with_pool(students)
-        .with_priority(&priority)
+        .with_priority(priority)
         .finish()
         .unwrap();
 
     // I'm some N5 loser don't judge too hard pls...
     let banner = BannerBuilder::new("不運ですね。")
         .with_name_translation(Language::English, "Unlucky, right?")
-        .with_sparkable_students(&sparkable)
-        .with_gacha(&gacha)
+        .with_sparkable_students(sparkable)
+        .with_gacha(gacha)
         .finish()
         .unwrap();
 
